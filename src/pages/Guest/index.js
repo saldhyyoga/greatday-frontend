@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
-import { baseURL } from "../../helpers";
+import { baseURL, dateTime } from "../../helpers";
 import MUIDataTable from "mui-datatables";
 import { Button, Card } from "reactstrap";
+import cookie from "js-cookie";
+
+const token = cookie.get("token");
 
 export default function App() {
 	const [total, setTotal] = useState(0);
@@ -33,17 +36,28 @@ export default function App() {
 		responsive: "standard",
 	};
 
-	const columns = [
-		"name",
-		"phonenumber",
-		"email",
-		"gender",
-		"address",
-		"office",
-		"purpose",
-		"visit_date",
-		"action",
-	];
+	const columns = token
+		? [
+				"name",
+				"phonenumber",
+				"email",
+				"gender",
+				"address",
+				"office",
+				"purpose",
+				"visit_date",
+				"action",
+		  ]
+		: [
+				"name",
+				"phonenumber",
+				"email",
+				"gender",
+				"address",
+				"office",
+				"purpose",
+				"visit_date",
+		  ];
 
 	const iterateData = () => {
 		if (data !== undefined && data !== null) {
@@ -56,10 +70,8 @@ export default function App() {
 					item.address,
 					item.office,
 					item.tujuan,
-					item.createdAt,
-					<>
-						<Button color="primary">Rating</Button>
-					</>,
+					dateTime(item.createdAt),
+					<>{token ? <Button color="primary">Rating</Button> : null}</>,
 				];
 			});
 		}
