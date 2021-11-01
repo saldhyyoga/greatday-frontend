@@ -20,7 +20,7 @@ export default function App() {
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
-	const [gender, setGender] = useState("");
+	const [gender, setGender] = useState("Laki-laki");
 	const [address, setAddress] = useState("");
 	const [office, setOffice] = useState("");
 	const [tujuan, setTujuan] = useState("");
